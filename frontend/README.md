@@ -1,69 +1,105 @@
-# React + TypeScript + Vite
+<p align="center">
+  <a href="https://vite.dev/" target="_blank">
+    <img src="https://vite.dev/logo.svg" width="120" alt="Vitest Logo" />
+  </a>
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Rick & Morty
 
-Currently, two official plugins are available:
+Uma aplicação web moderna para explorar personagens do universo Rick and Morty, consumindo dados da API oficial da série.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📋 Sobre o Projeto
 
-## Expanding the ESLint configuration
+O Rick & Morty Explorer é uma aplicação responsiva que permite aos usuários navegar e descobrir informações sobre personagens da série Rick and Morty. A aplicação possui um design futurístico inspirado no tema sci-fi da série.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### ✨ Funcionalidades
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Listagem de Personagens**: Visualização em grid responsivo de todos os personagens
+- **Paginação**: Carregamento progressivo com botão "Buscar mais"
+- **Detalhes do Personagem**: Página dedicada com informações detalhadas
+- **Design Responsivo**: Otimizado para desktop, tablet e mobile
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tecnologias Utilizadas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **React 19** - Biblioteca principal para construção da interface
+- **TypeScript** - Tipagem estática para maior segurança no código
+- **Vite** - Bundler moderno e rápido para desenvolvimento
+- **Tailwind CSS** - Framework CSS utility-first para estilização
+- **React Router Dom** - Roteamento entre páginas
+- **Shadcn/ui** - Componentes de interface pré-construídos
+- **Lucide React** - Ícones modernos e consistentes
+
+## 🌐 API Utilizada
+
+- **Rick and Morty API**: https://rickandmortyapi.com/
+    - Endpoints utilizados:
+        - `GET /api/character` - Lista de personagens com paginação
+        - `GET /api/character/{id}` - Detalhes de um personagem específico
+
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- npm ou yarn
+
+### Instalação
+
+1. Clone o repositório:
+
+```bash
+git clone <https://github.com/pedrocarvalho3/fullstack-test>
+cd frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Instale as dependências:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+1. Execute o projeto em modo de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+1. Acesse no navegador:
+
+```
+<http://localhost:5173>
+```
+
+### Scripts Disponíveis
+
+- `npm run dev` - Executa em modo de desenvolvimento
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/           # Componentes reutilizáveis
+│   ├── ui/              # Componentes base do Shadcn/ui
+│   ├── CharacterCard.tsx    # Card individual do personagem
+│   └── CharacterList.tsx    # Lista de personagens com busca
+├── pages/               # Páginas da aplicação
+│   ├── Index.tsx        # Página inicial
+│   ├── CharacterDetails.tsx # Página de detalhes
+│   └── NotFound.tsx     # Página 404
+├── hooks/               # Hooks customizados
+├── lib/                 # Utilitários e configurações
+├── App.tsx             # Componente principal
+├── main.tsx            # Ponto de entrada
+└── index.css           # Estilos globais e design system
+
+```
+
+## 📱 Responsividade
+
+- **Mobile**: Layout em coluna única (< 768px)
+- **Tablet**: Grid de 2 colunas (768px - 1024px)
+- **Desktop**: Grid de 3-4 colunas (> 1024px)
+
+## 📄 Licença
+
+Este projeto foi desenvolvido como parte de um desafio técnico e está disponível para fins educacionais.

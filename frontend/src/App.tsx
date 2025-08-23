@@ -1,9 +1,9 @@
-function App() {
+import Index from "./pages/Index";
+
+export default function App() {
   return (
-    <div className="p-4 bg-blue-500 text-white">
-      <h1>Olá mundo</h1>
-    </div>
+    <>
+      <Index />
+    </>
   );
 }
-
-export default App;

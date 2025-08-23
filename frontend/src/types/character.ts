@@ -9,3 +9,17 @@ export interface Character {
     name: string;
   };
 }
+
+export interface CharacterDetailed extends Character {
+  location: {
+    name: string;
+    url: string;
+  };
+  episode: string[];
+  url: string;
+  created: string;
+  origin: {
+    name: string;
+    url: string;
+  };
+}

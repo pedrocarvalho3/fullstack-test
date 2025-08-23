@@ -1,8 +1,15 @@
 import useCharacters from "@/hooks/useCharacters";
 import CharacterCard from "./CharacterCard";
+import type { Character } from "@/types/character";
+import { useNavigate } from "react-router-dom";
 
 export const CharacterList = () => {
   const { characters, loading, error } = useCharacters();
+  const navigate = useNavigate();
+
+  const handleCharacterClick = (character: Character) => {
+    navigate(`/character/${character.id}`, { state: { character } });
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -13,7 +20,7 @@ export const CharacterList = () => {
           <CharacterCard
             key={character.id}
             character={character}
-            onClick={() => console.log("teste")}
+            onClick={() => handleCharacterClick(character)}
           />
         ))}
       </div>

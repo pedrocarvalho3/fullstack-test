@@ -6,6 +6,8 @@ import {
   SPECIES_TRANSLATIONS,
   STATUS_TRANSLATIONS,
 } from "@/constants/character";
+import { getStatusColor } from "@/lib/utils";
+import { cardClass } from "@/constants/styles";
 
 interface CharacterCardProps {
   character: Character;
@@ -16,22 +18,8 @@ export default function CharacterCard({
   character,
   onClick,
 }: CharacterCardProps) {
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "alive":
-        return "bg-lime-300 text-dark";
-      case "dead":
-        return "bg-destructive text-destructive-foreground";
-      default:
-        return "bg-muted text-muted-foreground";
-    }
-  };
-
   return (
-    <Card
-      className="border-slate-600 bg-slate-800 cursor-pointer overflow-hidden group p-0 hover:border-primary shadow-lg transition-transform duration-300 hover:shadow-lime-500 hover:-translate-y-1 "
-      onClick={onClick}
-    >
+    <Card className={`${cardClass} p-0`} onClick={onClick}>
       <div className="relative">
         <img
           src={character.image}

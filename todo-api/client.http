@@ -25,7 +25,7 @@ Content-Type: application/json
 ###
 
 # @name update_todo
-PUT {{baseUrl}}/todos/4b5f10bd-e495-47f3-ba8b-16f3369a494b
+PUT {{baseUrl}}/todos/3fc0403a-b447-4a5e-92aa-f37ca43e0a32
 Content-Type: application/json
 
 {
@@ -33,3 +33,9 @@ Content-Type: application/json
   "description": "criar CRUD nest respeitando todos os padrões de arquitetura",
   "completed": true
 }
+
+###
+
+# @name delete_todo
+DELETE {{baseUrl}}/todos/3fc0403a-b447-4a5e-92aa-f37ca43e0a32
+Content-Type: application/json

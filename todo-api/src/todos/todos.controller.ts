@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -35,5 +36,11 @@ export class TodosController {
   @Put(':id')
   update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
     return this.todosService.update(id, updateTodoDto);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.OK)
+  delete(@Param('id') id: string) {
+    return this.todosService.delete(id);
   }
 }

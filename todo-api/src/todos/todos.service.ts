@@ -50,4 +50,15 @@ export class TodosService {
     this.todos[todoIndex] = updatedTodo;
     return updatedTodo;
   }
+
+  delete(id: string): { message: string } {
+    const todoIndex = this.todos.findIndex((todo) => todo.id === id);
+
+    if (todoIndex === -1) {
+      throw new NotFoundException(`Tarefa com ID ${id} não encontrada`);
+    }
+
+    this.todos.splice(todoIndex, 1);
+    return { message: `Tarefa com ID ${id} foi excluída com sucesso` };
+  }
 }

@@ -1,6 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import type { Character } from "@/types/characters";
+import type { Character } from "@/types/character";
+import {
+  GENDER_TRANSLATIONS,
+  SPECIES_TRANSLATIONS,
+  STATUS_TRANSLATIONS,
+} from "@/constants/character";
 
 interface CharacterCardProps {
   character: Character;
@@ -35,7 +40,8 @@ export default function CharacterCard({
         />
         <div className="absolute top-2 right-2">
           <Badge className={getStatusColor(character.status)}>
-            {character.status}
+            {STATUS_TRANSLATIONS[character.status.toLowerCase()] ||
+              character.status}
           </Badge>
         </div>
       </div>
@@ -45,9 +51,18 @@ export default function CharacterCard({
         </h3>
         <div className="space-y-1 text-sm text-gray-500">
           <p>
-            {character.species} • {character.gender}
+            {SPECIES_TRANSLATIONS[character.species.toLowerCase()] ||
+              character.species}{" "}
+            •{" "}
+            {GENDER_TRANSLATIONS[character.gender.toLowerCase()] ||
+              character.gender}
           </p>
-          <p className="truncate">Origem: {character.origin.name}</p>
+          <p className="truncate">
+            Origem:{" "}
+            {character.origin.name.toLowerCase() === "unknown"
+              ? "Desconhecido"
+              : character.origin.name}
+          </p>
         </div>
       </CardContent>
     </Card>

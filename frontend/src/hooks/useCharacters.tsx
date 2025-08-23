@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Character } from "@/types/characters";
+import type { Character } from "@/types/character";
 
 interface ApiResponse {
   results: Character[];

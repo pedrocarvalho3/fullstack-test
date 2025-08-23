@@ -79,7 +79,7 @@ export const CharacterList = () => {
                 Carregando...
               </>
             ) : (
-              "Load More Characters"
+              "Buscar mais personagens"
             )}
           </Button>
         </div>

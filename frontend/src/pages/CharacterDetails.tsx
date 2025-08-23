@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Calendar, Users } from "lucide-react";
-import { getStatusColor } from "@/lib/utils";
+import { getStatusColor } from "@/utils";
 import useCharacterDetails from "@/hooks/useCharacterDetails";
 import { cardClass } from "@/constants/styles";
 import {

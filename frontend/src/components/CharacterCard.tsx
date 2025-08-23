@@ -6,7 +6,7 @@ import {
   SPECIES_TRANSLATIONS,
   STATUS_TRANSLATIONS,
 } from "@/constants/character";
-import { getStatusColor } from "@/lib/utils";
+import { getStatusColor } from "@/utils";
 import { cardClass } from "@/constants/styles";
 
 interface CharacterCardProps {

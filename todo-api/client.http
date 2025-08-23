@@ -6,12 +6,18 @@ Content-Type: application/json
 
 ###
 
+# @name get_todo
+GET {{baseUrl}}/todos/a77e8dbe-89c4-4365-89d1-6467548af41d
+Content-Type: application/json
+
+###
+
 # @name create_todo
 POST {{baseUrl}}/todos
 Content-Type: application/json
 
 {
-  "title": "Fazer café",
-  "description": "fazer café da tarde para comer com pao de queijo",
+  "title": "Fazer café com leite",
+  "description": "fazer café da tarde para comer com pao de queijo e requeijao",
   "completed": true
 }

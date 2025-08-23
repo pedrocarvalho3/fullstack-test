@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Todo } from './entities/todo.entity';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,6 +9,14 @@ export class TodosService {
 
   findAll(): Todo[] {
     return this.todos;
+  }
+
+  findById(id: string): Todo {
+    const todo = this.todos.find((todo) => todo.id === id);
+    if (!todo) {
+      throw new NotFoundException(`Tarefa com ID ${id} não encontrada`);
+    }
+    return todo;
   }
 
   create(createTodoDto: CreateTodoDto): Todo {

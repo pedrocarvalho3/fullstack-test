@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
@@ -16,6 +17,11 @@ export class TodosController {
   @Get()
   findAll() {
     return this.todosService.findAll();
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: string) {
+    return this.todosService.findById(id);
   }
 
   @Post()

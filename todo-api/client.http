@@ -21,3 +21,15 @@ Content-Type: application/json
   "description": "fazer café da tarde para comer com pao de queijo e requeijao",
   "completed": true
 }
+
+###
+
+# @name update_todo
+PUT {{baseUrl}}/todos/4b5f10bd-e495-47f3-ba8b-16f3369a494b
+Content-Type: application/json
+
+{
+  "title": "Criar CRUD nest",
+  "description": "criar CRUD nest respeitando todos os padrões de arquitetura",
+  "completed": true
+}

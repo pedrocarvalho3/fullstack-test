@@ -6,9 +6,11 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -28,5 +30,10 @@ export class TodosController {
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createTodoDto: CreateTodoDto) {
     return this.todosService.create(createTodoDto);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
+    return this.todosService.update(id, updateTodoDto);
   }
 }

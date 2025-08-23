@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3000
+
+# @name fetch_todos
+GET {{baseUrl}}/todos
+Content-Type: application/json
+
+###
+
+# @name create_todo
+POST {{baseUrl}}/todos
+Content-Type: application/json
+
+{
+  "title": "Fazer café",
+  "description": "fazer café da tarde para comer com pao de queijo",
+  "completed": true
+}

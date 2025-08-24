@@ -1,4 +1,3 @@
-// src/todos/repositories/todo-in-memory.repository.ts
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { TodoRepository } from './todos.repository';
@@ -48,5 +47,9 @@ export class TodoInMemoryRepository implements TodoRepository {
     const todoIndex = this.todos.findIndex((todo) => todo.id === id);
 
     this.todos.splice(todoIndex, 1);
+  }
+
+  clear(): void {
+    this.todos = [];
   }
 }

@@ -1,18 +1,45 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TodosService } from './todos.service';
+import { TodoRepository } from './repositories/todos.repository';
+import { TodoInMemoryRepository } from './repositories/todo-in-memory.repository';
+import { CreateTodoDto } from './dto/create-todo.dto';
 
 describe('TodosService', () => {
   let service: TodosService;
+  let repository: TodoInMemoryRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TodosService],
+      providers: [
+        TodosService,
+        {
+          provide: TodoRepository,
+          useClass: TodoInMemoryRepository,
+        },
+      ],
     }).compile();
 
     service = module.get<TodosService>(TodosService);
+    repository = module.get<TodoInMemoryRepository>(TodoRepository);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  afterEach(() => {
+    repository.clear();
+  });
+
+  describe('findAll', () => {
+    it('should return empty array when no todos exist', async () => {
+      const result = await service.findAll();
+      expect(result).toEqual([]);
+    });
+
+    it('should return all todos', async () => {
+      const createDto: CreateTodoDto = { title: 'Test Todo' };
+      await service.create(createDto);
+
+      const result = await service.findAll();
+      expect(result).toHaveLength(1);
+      expect(result[0].title).toBe('Test Todo');
+    });
   });
 });

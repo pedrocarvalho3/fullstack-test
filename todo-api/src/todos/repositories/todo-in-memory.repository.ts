@@ -18,7 +18,7 @@ export class TodoInMemoryRepository implements TodoRepository {
     return todo || null;
   }
 
-  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
+  async create(createTodoDto: CreateTodoDto): Promise<void> {
     const newTodo = new Todo({
       id: uuidv4(),
       title: createTodoDto.title,
@@ -29,7 +29,6 @@ export class TodoInMemoryRepository implements TodoRepository {
     });
 
     this.todos.push(newTodo);
-    return newTodo;
   }
 
   async update(id: string, updateTodoDto: UpdateTodoDto): Promise<void> {

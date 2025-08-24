@@ -4,6 +4,7 @@ import { TodoRepository } from './repositories/todos.repository';
 import { TodoInMemoryRepository } from './repositories/todo-in-memory.repository';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { NotFoundException } from '@nestjs/common';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 describe('TodosService', () => {
   let service: TodosService;
@@ -47,10 +48,12 @@ describe('TodosService', () => {
   describe('findById', () => {
     it('should return todo when found', async () => {
       const createDto: CreateTodoDto = { title: 'Test Todo' };
-      const created = await repository.create(createDto);
+      await repository.create(createDto);
 
-      const result = await service.findById(created.id);
-      expect(result.id).toBe(created.id);
+      const todos = await service.findAll();
+
+      const result = await service.findById(todos[0].id);
+      expect(result.id).toBe(todos[0].id);
       expect(result.title).toBe('Test Todo');
     });
 
@@ -70,6 +73,32 @@ describe('TodosService', () => {
       const todos = await service.findAll();
       expect(todos).toHaveLength(1);
       expect(todos[0].title).toBe('Test Todo');
+    });
+  });
+
+  describe('update', () => {
+    it('should update existing todo', async () => {
+      const createDto: CreateTodoDto = { title: 'Original Title' };
+      await service.create(createDto);
+
+      const todos = await service.findAll();
+      expect(todos[0].title).toBe('Original Title');
+
+      const updateDto: UpdateTodoDto = { title: 'Updated Title' };
+
+      await service.update(todos[0].id, updateDto);
+
+      const updatedTodos = await service.findAll();
+
+      expect(updatedTodos[0].title).toBe('Updated Title');
+    });
+
+    it('should throw NotFoundException when todo not found', async () => {
+      const updateDto: UpdateTodoDto = { title: 'Updated' };
+
+      await expect(service.update('non-existent', updateDto)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });

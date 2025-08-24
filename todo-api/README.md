@@ -7,12 +7,12 @@
 
 # 📋 API Todos - NestJS
 
-Uma API RESTful para gerenciamento de tarefas (todos) construída com NestJS, TypeScript e validação robusta.
+Uma API RESTful para gerenciamento de tarefas (todos) construída com NestJS, TypeScript, PostgreSql, Docker, testes unitários com jest e validação robusta.
 
 ## 🚀 Instalação e Execução
 
 ### Pré-requisitos
-- Node.js (versão 18 ou superior)
+- Node.js (versão 20 ou superior)
 - npm ou yarn
 
 ### Instalação
@@ -96,14 +96,6 @@ A API estará disponível em: `http://localhost:3000`
 - **Content-Type:** `application/json`
 - **Body:**
 
-```json
-{
-  "title": "Título da tarefa (obrigatório)",
-  "description": "Descrição opcional",
-  "completed": false
-}
-```
-
 - **Validações:**
   - `title`: obrigatório, 1-100 caracteres
   - `description`: opcional, máximo 500 caracteres
@@ -116,41 +108,33 @@ A API estará disponível em: `http://localhost:3000`
 - **Content-Type:** `application/json`
 - **Body:** (todos os campos são opcionais)
 
-```json
-{
-  "title": "Novo título",
-  "description": "Nova descrição",
-  "completed": true
-}
-```
-
 ### Excluir tarefa
 - **Método:** `DELETE`
 - **URL:** `/todos/:id`
 - **Parâmetros:** `id` (string) - ID da tarefa
-- **Resposta:**
-
-```json
-{
-  "message": "Tarefa com ID {id} foi excluída com sucesso"
-}
-```
 
 ## 🔧 Estrutura do Projeto
 
 ```
 src/
+├── prisma/
+│   └── prisma.service.ts                 # Serviço do prisma
 ├── todos/
 │   ├── dto/
-│   │   ├── create-todo.dto.ts    # Validação para criação
-│   │   └── update-todo.dto.ts    # Validação para atualização
+│   │   ├── create-todo.dto.ts            # Validação para criação
+│   │   └── update-todo.dto.ts            # Validação para atualização
 │   ├── entities/
-│   │   └── todo.entity.ts        # Modelo da entidade Todo
-│   ├── todos.controller.ts       # Controller com rotas HTTP
-│   ├── todos.service.ts          # Lógica de negócio
-│   └── todos.module.ts           # Módulo do NestJS
-├── app.module.ts                 # Módulo raiz da aplicação
-└── main.ts                       # Ponto de entrada da aplicação
+│   │   └── todo.entity.ts                # Modelo da entidade Todo
+│   ├── repositories/
+│   │   ├── todo-in-memory.repository.ts  # Repositório em memória
+│   │   ├── todo-prisma.repository.ts     # Repositório Prisma
+│   │   └── todo.repository.ts            # Repositório Padrão 
+│   ├── todos.controller.ts               # Controller com rotas HTTP
+│   ├── todos.service.spec.ts             # Testes unitários
+│   ├── todos.service.ts                  # Lógica de negócio
+│   └── todos.module.ts                   # Módulo do NestJS
+├── app.module.ts                         # Módulo raiz da aplicação
+└── main.ts                               # Ponto de entrada da aplicação
 ```
 
 ## ⚡ Funcionalidades
@@ -167,7 +151,7 @@ src/
 - Códigos de status HTTP corretos
 
 ### Armazenamento
-- Dados armazenados em memória (desenvolvimento)
+- Dados armazenados em memória para testes e banco de dados Postgres dockerizado para produção
 - IDs únicos gerados com UUID
 - Timestamps automáticos (createdAt, updatedAt)
 
@@ -178,6 +162,8 @@ src/
 - **class-validator** - Validação de dados
 - **class-transformer** - Transformação de dados
 - **UUID** - Geração de IDs únicos
+- **Postgres** - Banco de dados relacional
+- **Docker** - conteinerização do banco de dados
 - **Jest** - Testes unitários
 
 ## 📄 Licença

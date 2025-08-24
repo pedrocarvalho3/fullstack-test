@@ -101,4 +101,23 @@ describe('TodosService', () => {
       );
     });
   });
+
+  describe('delete', () => {
+    it('should delete existing todo', async () => {
+      const createDto: CreateTodoDto = { title: 'To Delete' };
+      await service.create(createDto);
+
+      const todos = await service.findAll();
+
+      await service.delete(todos[0].id);
+
+      expect(todos).toHaveLength(0);
+    });
+
+    it('should throw NotFoundException when todo not found', async () => {
+      await expect(service.delete('non-existent')).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+  });
 });

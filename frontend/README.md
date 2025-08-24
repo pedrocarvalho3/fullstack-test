@@ -40,7 +40,7 @@ O Rick & Morty Explorer é uma aplicação responsiva que permite aos usuários 
 
 ### Pré-requisitos
 
-- Node.js (versão 18 ou superior)
+- Node.js (versão 20 ou superior)
 - npm ou yarn
 
 ### Instalação

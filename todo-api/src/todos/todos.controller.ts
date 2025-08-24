@@ -29,18 +29,18 @@ export class TodosController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createTodoDto: CreateTodoDto) {
-    return this.todosService.create(createTodoDto);
+  async create(@Body() createTodoDto: CreateTodoDto) {
+    await this.todosService.create(createTodoDto);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
-    return this.todosService.update(id, updateTodoDto);
+  async update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
+    await this.todosService.update(id, updateTodoDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  delete(@Param('id') id: string) {
-    return this.todosService.delete(id);
+  async delete(@Param('id') id: string) {
+    await this.todosService.delete(id);
   }
 }

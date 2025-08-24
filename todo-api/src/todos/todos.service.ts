@@ -1,64 +1,46 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Todo } from './entities/todo.entity';
 import { CreateTodoDto } from './dto/create-todo.dto';
-import { v4 as uuidv4 } from 'uuid';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { TodoRepository } from './repositories/todos.repository';
 
 @Injectable()
 export class TodosService {
-  private todos: Todo[] = [];
+  constructor(private readonly todoRepository: TodoRepository) {}
 
-  findAll(): Todo[] {
-    return this.todos;
+  async findAll(): Promise<Todo[]> {
+    return this.todoRepository.findAll();
   }
 
-  findById(id: string): Todo {
-    const todo = this.todos.find((todo) => todo.id === id);
+  async findById(id: string): Promise<Todo> {
+    const todo = await this.todoRepository.findById(id);
     if (!todo) {
       throw new NotFoundException(`Tarefa com ID ${id} não encontrada`);
     }
     return todo;
   }
 
-  create(createTodoDto: CreateTodoDto): Todo {
-    const newTodo = new Todo({
-      id: uuidv4(),
-      title: createTodoDto.title,
-      description: createTodoDto.description || '',
-      completed: createTodoDto.completed || false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-
-    this.todos.push(newTodo);
-    return newTodo;
+  async create(createTodoDto: CreateTodoDto): Promise<void> {
+    await this.todoRepository.create(createTodoDto);
   }
 
-  update(id: string, updateTodoDto: UpdateTodoDto): Todo {
-    const todoIndex = this.todos.findIndex((todo) => todo.id === id);
+  async update(id: string, updateTodoDto: UpdateTodoDto): Promise<void> {
+    const todo = await this.todoRepository.findById(id);
 
-    if (todoIndex === -1) {
+    if (!todo) {
       throw new NotFoundException(`Tarefa com ID ${id} não encontrada`);
     }
 
-    const updatedTodo = {
-      ...this.todos[todoIndex],
-      ...updateTodoDto,
-      updatedAt: new Date(),
-    };
-
-    this.todos[todoIndex] = updatedTodo;
-    return updatedTodo;
+    await this.todoRepository.update(id, updateTodoDto);
   }
 
-  delete(id: string): { message: string } {
-    const todoIndex = this.todos.findIndex((todo) => todo.id === id);
+  async delete(id: string): Promise<void> {
+    const todo = await this.todoRepository.findById(id);
 
-    if (todoIndex === -1) {
+    if (!todo) {
       throw new NotFoundException(`Tarefa com ID ${id} não encontrada`);
     }
 
-    this.todos.splice(todoIndex, 1);
-    return { message: `Tarefa com ID ${id} foi excluída com sucesso` };
+    await this.todoRepository.delete(id);
   }
 }

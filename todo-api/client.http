@@ -7,7 +7,7 @@ Content-Type: application/json
 ###
 
 # @name get_todo
-GET {{baseUrl}}/todos/a77e8dbe-89c4-4365-89d1-6467548af41d
+GET {{baseUrl}}/todos/c47ef239-c02d-4929-8fdf-2a8e586b8ad1
 Content-Type: application/json
 
 ###
@@ -18,24 +18,22 @@ Content-Type: application/json
 
 {
   "title": "Fazer café com leite",
-  "description": "fazer café da tarde para comer com pao de queijo e requeijao",
-  "completed": true
+  "description": "fazer café da tarde para comer com pao de queijo e requeijao"
 }
 
 ###
 
 # @name update_todo
-PUT {{baseUrl}}/todos/3fc0403a-b447-4a5e-92aa-f37ca43e0a32
+PUT {{baseUrl}}/todos/c47ef239-c02d-4929-8fdf-2a8e586b8ad1
 Content-Type: application/json
 
 {
   "title": "Criar CRUD nest",
-  "description": "criar CRUD nest respeitando todos os padrões de arquitetura",
-  "completed": true
+  "description": "criar CRUD nest respeitando todos os padrões de arquitetura"
 }
 
 ###
 
 # @name delete_todo
-DELETE {{baseUrl}}/todos/3fc0403a-b447-4a5e-92aa-f37ca43e0a32
+DELETE {{baseUrl}}/todos/c47ef239-c02d-4929-8fdf-2a8e586b8ad1
 Content-Type: application/json

@@ -19,7 +19,7 @@ export class TodoInMemoryRepository implements TodoRepository {
     return todo || null;
   }
 
-  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
+  async create(createTodoDto: CreateTodoDto): Promise<void> {
     const newTodo = new Todo({
       id: uuidv4(),
       title: createTodoDto.title,
@@ -30,15 +30,10 @@ export class TodoInMemoryRepository implements TodoRepository {
     });
 
     this.todos.push(newTodo);
-    return newTodo;
   }
 
-  async update(id: string, updateTodoDto: UpdateTodoDto): Promise<Todo | null> {
+  async update(id: string, updateTodoDto: UpdateTodoDto): Promise<void> {
     const todoIndex = this.todos.findIndex((todo) => todo.id === id);
-
-    if (todoIndex === -1) {
-      return null;
-    }
 
     const updatedTodo = new Todo({
       ...this.todos[todoIndex],
@@ -47,17 +42,11 @@ export class TodoInMemoryRepository implements TodoRepository {
     });
 
     this.todos[todoIndex] = updatedTodo;
-    return updatedTodo;
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(id: string): Promise<void> {
     const todoIndex = this.todos.findIndex((todo) => todo.id === id);
 
-    if (todoIndex === -1) {
-      return false;
-    }
-
     this.todos.splice(todoIndex, 1);
-    return true;
   }
 }

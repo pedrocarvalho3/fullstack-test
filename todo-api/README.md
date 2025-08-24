@@ -9,6 +9,8 @@
 
 Uma API RESTful para gerenciamento de tarefas (todos) construída com NestJS, TypeScript, PostgreSql, Docker, testes unitários com jest e validação robusta.
 
+> **Recomendação:** Para testar rapidamente as rotas da API, sugiro instalar a extensão **REST Client** no VSCode e utilizar o arquivo `client.http` presente na raiz do projeto.
+
 ## 🚀 Instalação e Execução
 
 ### Pré-requisitos

@@ -60,4 +60,16 @@ describe('TodosService', () => {
       );
     });
   });
+
+  describe('create', () => {
+    it('should create a new todo', async () => {
+      const createDto: CreateTodoDto = { title: 'Test Todo' };
+
+      await service.create(createDto);
+
+      const todos = await service.findAll();
+      expect(todos).toHaveLength(1);
+      expect(todos[0].title).toBe('Test Todo');
+    });
+  });
 });

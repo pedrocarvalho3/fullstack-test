@@ -24,14 +24,16 @@ export class TodoPrismaRepository implements TodoRepository {
     return todo ? new Todo(todo) : null;
   }
 
-  async create(createTodoDto: CreateTodoDto): Promise<void> {
-    await this.prisma.todo.create({
+  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
+    const todo = await this.prisma.todo.create({
       data: {
         title: createTodoDto.title,
         description: createTodoDto.description || '',
         completed: createTodoDto.completed || false,
       },
     });
+
+    return todo;
   }
 
   async update(id: string, updateTodoDto: UpdateTodoDto): Promise<void> {

@@ -25,6 +25,26 @@ cd todo-api
 npm install
 ```
 
+### Crie a variável de ambiente baseada no exemplo
+```bash
+cp .env.example .env
+```
+
+### Suba o container do banco de dados
+```bash
+docker-compose up -d
+```
+
+### Gere o client do Prisma
+```bash
+npx prisma generate
+```
+
+### Execute os testes unitários das services
+```bash
+npm run test
+```
+
 ### Executando o projeto
 ```bash
 # Desenvolvimento (com hot reload)
@@ -158,6 +178,7 @@ src/
 - **class-validator** - Validação de dados
 - **class-transformer** - Transformação de dados
 - **UUID** - Geração de IDs únicos
+- **Jest** - Testes unitários
 
 ## 📄 Licença
 
